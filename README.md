@@ -1,5 +1,5 @@
 # 2Bi-Bimestral-TIA-PDM
-Daniel Savala Lhoretti; Dyuliano...; Enzo Cópia Coruja; Lucas Antoni Chaves Barbato; Lucas Kopezky Delanhese Gonçalves; Ricardo Gabriel Camargo Soares
+Daniel Savala Lhoretti; Dyuliano Oliveira Luiz; Enzo Cópia Coruja; Lucas Antoni Chaves Barbato; Lucas Kopezky Delanhese Gonçalves; Ricardo Gabriel Camargo Soares
 
 # Welcome to your Expo app 👋
 
