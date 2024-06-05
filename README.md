@@ -1,3 +1,6 @@
+# 2Bi-Bimestral-TIA-PDM
+Daniel Savala Lhoretti; Dyuliano Oliveira Luiz; Enzo Cópia Coruja; Lucas Antoni Chaves Barbato; Lucas Kopezky Delanhese Gonçalves; Ricardo Gabriel Camargo Soares
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
