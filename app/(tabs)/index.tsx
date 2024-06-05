@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from '../../constants/styleIndex';
-import { SafeAreaView, View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import { SafeAreaView, View, Text, FlatList } from 'react-native';
+import Botao from '../../components/Botao/botao';
+import Input from '../../components/Input/input';
 import * as tf from '@tensorflow/tfjs';
 import * as toxicity from '@tensorflow-models/toxicity';
 
@@ -66,15 +68,13 @@ export default function App() {
       </View>
 
       <View style={styles.mainContent}>
-        <TextInput
-          style={styles.input}
+        <Input
           placeholder='Digite aqui...'
           value={valor}
           onChangeText={setValor}
         />
-        <TouchableOpacity style={styles.button} onPress={adicionarItem}>
-          <Text style={styles.buttonText}>Verificar</Text>
-        </TouchableOpacity>
+
+        <Botao onPress={adicionarItem} />
       </View>
     </SafeAreaView>
   );

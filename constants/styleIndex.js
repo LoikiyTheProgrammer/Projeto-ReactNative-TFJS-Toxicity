@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   input: {
     width: '100%',
     height: '30%',
-    padding: '10%',
+    paddingLeft: '10%',
     marginBottom: '2%',
     fontSize: 25,
     color: '#fff',
