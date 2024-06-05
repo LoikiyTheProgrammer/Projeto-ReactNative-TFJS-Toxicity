@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import styles from '../../constants/styleIndex';
 import { SafeAreaView, View, Text, FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Botao from '../../components/Botao/botao';
 import Input from '../../components/Input/input';
-import * as tf from '@tensorflow/tfjs';
 import * as toxicity from '@tensorflow-models/toxicity';
+import * as tf from '@tensorflow/tfjs';
 
-export default function App() {
+export default function Chat() {
+  const navigation = useNavigation()
+
   const [valor, setValor] = useState('');
   const [itens, setItens] = useState([]);
   const [headerText, setHeaderText] = useState('Verifique a agressividade de seu texto');
