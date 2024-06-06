@@ -1,35 +1,38 @@
+// Importações necessárias
 import React, { useState } from 'react';
 import styles from '../../constants/styleIndex';
 import { SafeAreaView, View, Text, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Botao from '../../components/Botao/botao';
-import Input from '../../components/Input/input';
-import checkToxicity from '../../src/lib/ai'; // Importando a função de verificação de toxicidade
+import Botao from '../../components/Botao/botao'; // Componente de botão personalizado
+import Input from '../../components/Input/input'; // Componente de input personalizado
+import checkToxicity from '../../src/lib/ai'; // IA de toxicidade
 
 export default function Chat() {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
-  const [valor, setValor] = useState('');
-  const [itens, setItens] = useState([]);
-  const [headerText, setHeaderText] = useState('Verifique a agressividade de seu texto');
-  const [verificada, setVerificada] = useState(null);
-  const [isToxic, setIsToxic] = useState(false);
+  // Declaração de estados
+  const [valor, setValor] = useState(''); // Estado para armazenar o valor do input
+  const [itens, setItens] = useState([]); // Estado para armazenar a lista de itens
+  const [headerText, setHeaderText] = useState('Verifique a agressividade de seu texto'); // Estado para armazenar o texto do header
+  const [verificada, setVerificada] = useState(null); // Estado para armazenar o texto verificado
+  const [isToxic, setIsToxic] = useState(false); // Estado para armazenar se o texto é tóxico ou não
 
+  // Função para adicionar um item na lista
   const adicionarItem = async () => {
-    if (valor.trim()) {
-      const foundToxicities = await checkToxicity(valor); // Usando a função importada
+    if (valor.trim()) { // Verifica se o valor não é vazio ou apenas espaços em branco
+      const foundToxicities = await checkToxicity(valor); // Chama a função de verificação de toxicidade
 
-      setVerificada(valor);
+      setVerificada(valor); // Armazena o valor verificado
 
-      if (foundToxicities.length > 0) {
-        setHeaderText(`Conteúdo ${foundToxicities[0]}`);
-        setIsToxic(true);
-      } else {
-        setHeaderText('Verifique a agressividade de seu texto');
-        setItens([...itens, valor]);
-        setIsToxic(false);
+      if (foundToxicities.length > 0) { // Se forem encontradas toxicidades
+        setHeaderText(`Conteúdo ${foundToxicities[0]}`); // Atualiza o texto do header com a primeira toxicidade encontrada
+        setIsToxic(true); // Define que o texto é tóxico
+      } else { // Se não forem encontradas toxicidades
+        setHeaderText('Verifique a agressividade de seu texto'); // Restaura o texto original do header
+        setItens([...itens, valor]); // Adiciona o valor à lista de itens
+        setIsToxic(false); // Define que o texto não é tóxico
       }
-      setValor('');
+      setValor(''); // Limpa o input
     }
   };
 
@@ -37,15 +40,15 @@ export default function Chat() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>{headerText}</Text>
-        {verificada && (
+        {verificada && ( // Se houver um texto verificado, exibe-o
           <View style={styles.item}>
-            <Text style={[styles.itemText, { color: isToxic ? 'red' : 'green' }]}>{verificada}</Text>
+            <Text style={[styles.itemText, { color: isToxic ? 'red' : 'green' }]}>{verificada}</Text> {/*Deixa o texto vermelho quando for tóxico e verde quando não for*/}
           </View>
         )}
         <FlatList
-          data={itens}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
+          data={itens} // Dados da lista
+          keyExtractor={(item, index) => index.toString()} // Coloca um id em cada item
+          renderItem={({ item }) => ( // Função para renderizar cada item
             <View style={styles.item}>
               <Text style={styles.itemText}>{item}</Text>
             </View>
@@ -56,11 +59,10 @@ export default function Chat() {
       <View style={styles.mainContent}>
         <Input
           placeholder='Digite aqui...'
-          value={valor}
-          onChangeText={setValor}
+          value={valor} // Valor do input
+          onChangeText={setValor} // Função chamada ao mudar o texto do input
         />
-
-        <Botao onPress={adicionarItem} />
+        <Botao onPress={adicionarItem}/> {/*Chama a função adicionarItem ao ser pressionado*/}
       </View>
     </SafeAreaView>
   );
