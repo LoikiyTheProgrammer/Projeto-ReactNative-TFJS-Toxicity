@@ -4,8 +4,7 @@ import { SafeAreaView, View, Text, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Botao from '../../components/Botao/botao';
 import Input from '../../components/Input/input';
-import * as toxicity from '@tensorflow-models/toxicity';
-import * as tf from '@tensorflow/tfjs';
+import checkToxicity from '../../src/lib/ai'; // Importando a função de verificação de toxicidade
 
 export default function Chat() {
   const navigation = useNavigation()
@@ -18,23 +17,7 @@ export default function Chat() {
 
   const adicionarItem = async () => {
     if (valor.trim()) {
-      const threshold = 0.2;
-      const model = await toxicity.load(threshold);
-      const predictions = await model.classify([valor]);
-
-      const toxicities = {
-        'identity_attack': 'ataque à identidade',
-        'insult': 'insulto',
-        'obscene': 'obsceno',
-        'severe_toxicity': 'extremamente tóxico',
-        'sexual_explicit': ' sexual explícito',
-        'threat': 'ameaça',
-        'toxicity': 'tóxico',
-      };
-
-      const foundToxicities = predictions
-        .filter(prediction => prediction.results.some(result => result.match))
-        .map(prediction => toxicities[prediction.label]);
+      const foundToxicities = await checkToxicity(valor); // Usando a função importada
 
       setVerificada(valor);
 

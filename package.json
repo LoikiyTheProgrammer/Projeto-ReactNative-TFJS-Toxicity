@@ -22,7 +22,7 @@
     "@tensorflow/tfjs": "^4.19.0",
     "@tensorflow/tfjs-react-native": "^1.0.0",
     "async-storage": "^0.1.0",
-    "banana": "^0.0.0",
+    "cross-fetch": "^4.0.0",
     "expo": "~51.0.9",
     "expo-camera": "~15.0.10",
     "expo-constants": "~16.0.2",
